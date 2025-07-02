@@ -1,31 +1,27 @@
 package com.example.orchidservice.pojo;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "order_details")
+@Document(collection = "order_details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orchid_id")
+    @DBRef
     private Orchid orchid;
 
-    @Column(name = "price")
     private Double price;
 
-    @Column(name = "quantity", nullable = false)
     private Integer quantity = 1;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @DBRef
     private Order order;
 }

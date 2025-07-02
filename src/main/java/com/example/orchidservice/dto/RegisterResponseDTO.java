@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterResponseDTO {
-    private Integer accountId;
+    private String accountId;
     private String accountName;
     private String email;
-    private Integer roleId;
+    private String roleId;
 }

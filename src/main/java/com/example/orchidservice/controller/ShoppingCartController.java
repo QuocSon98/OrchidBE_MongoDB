@@ -30,7 +30,7 @@ public class ShoppingCartController {
 
     @PostMapping("/add")
     public ResponseEntity<ShoppingCartDTO> addToCart(
-            @RequestParam Integer orchidId,
+            @RequestParam String orchidId,
             @RequestParam Integer quantity,
             HttpSession session) {
         try {
@@ -48,7 +48,7 @@ public class ShoppingCartController {
 
     @PutMapping("/update")
     public ResponseEntity<ShoppingCartDTO> updateCartItem(
-            @RequestParam Integer orchidId,
+            @RequestParam String orchidId,
             @RequestParam Integer quantity,
             HttpSession session) {
         String sessionId = session.getId();
@@ -58,7 +58,7 @@ public class ShoppingCartController {
 
     @DeleteMapping("/remove/{orchidId}")
     public ResponseEntity<ShoppingCartDTO> removeFromCart(
-            @PathVariable Integer orchidId,
+            @PathVariable String orchidId,
             HttpSession session) {
         String sessionId = session.getId();
         ShoppingCartDTO cart = shoppingCartService.removeFromCart(sessionId, orchidId);

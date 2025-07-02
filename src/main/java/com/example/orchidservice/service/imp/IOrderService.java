@@ -7,13 +7,10 @@ import java.util.Optional;
 
 public interface IOrderService {
     List<OrderDTO> getAllOrders();
-    Optional<OrderDTO> getOrderById(Integer id);
+    Optional<OrderDTO> getOrderById(String id);
     OrderDTO saveOrder(OrderDTO orderDTO);
-    OrderDTO updateOrder(Integer id, OrderDTO orderDTO);
-    void deleteOrder(Integer id);
-    List<OrderDTO> getOrdersByAccount(Integer accountId);
-    List<OrderDTO> getOrdersByStatus(String status);
-    List<OrderDTO> getOrdersByDateRange(LocalDate startDate, LocalDate endDate);
-    OrderDTO updateOrderStatus(Integer id, String status);
-    Double calculateOrderTotal(Integer orderId);
+    OrderDTO updateOrder(String id, OrderDTO orderDTO);
+    void deleteOrder(String id);
+    List<OrderDTO> getOrdersByAccount(String accountId);
+
 }

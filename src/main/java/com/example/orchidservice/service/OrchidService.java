@@ -29,7 +29,7 @@ public class OrchidService implements IOrchidService {
     }
 
     @Override
-    public Optional<OrchidDTO> getOrchidById(Integer id) {
+    public Optional<OrchidDTO> getOrchidById(String id) {
         return orchidRepository.findById(id)
                 .map(this::convertToDTO);
     }
@@ -59,7 +59,7 @@ public class OrchidService implements IOrchidService {
     }
 
     @Override
-    public OrchidDTO updateOrchid(Integer id, OrchidDTO orchidDTO) {
+    public OrchidDTO updateOrchid(String id, OrchidDTO orchidDTO) {
         Optional<Orchid> existing = orchidRepository.findById(id);
         if (existing.isPresent()) {
             Orchid orchid = existing.get();
@@ -82,36 +82,8 @@ public class OrchidService implements IOrchidService {
     }
 
     @Override
-    public void deleteOrchid(Integer id) {
+    public void deleteOrchid(String id) {
         orchidRepository.deleteById(id);
-    }
-
-    @Override
-    public List<OrchidDTO> getOrchidsByCategory(Integer categoryId) {
-        return orchidRepository.findByCategoryCategoryId(categoryId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<OrchidDTO> searchOrchidsByName(String name) {
-        return orchidRepository.findByOrchidNameContainingIgnoreCase(name).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<OrchidDTO> getOrchidsByPriceRange(Double minPrice, Double maxPrice) {
-        return orchidRepository.findByPriceBetween(minPrice, maxPrice).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<OrchidDTO> getOrchidsByNaturalType(Boolean isNatural) {
-        return orchidRepository.findByIsNatural(isNatural).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
     }
 
     private OrchidDTO convertToDTO(Orchid orchid) {

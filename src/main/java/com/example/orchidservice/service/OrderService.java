@@ -39,7 +39,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public Optional<OrderDTO> getOrderById(Integer id) {
+    public Optional<OrderDTO> getOrderById(String id) {
         return orderRepository.findById(id)
                 .map(this::convertToDTO);
     }
@@ -62,7 +62,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public OrderDTO updateOrder(Integer id, OrderDTO orderDTO) {
+    public OrderDTO updateOrder(String id, OrderDTO orderDTO) {
         Optional<Order> existing = orderRepository.findById(id);
         if (existing.isPresent()) {
             Order order = existing.get();
@@ -88,53 +88,15 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public void deleteOrder(Integer id) {
+    public void deleteOrder(String id) {
         orderRepository.deleteById(id);
     }
 
     @Override
-    public List<OrderDTO> getOrdersByAccount(Integer accountId) {
-        return orderRepository.findByAccount_AccountId(accountId).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public List<OrderDTO> getOrdersByAccount(String accountId) {
+        return List.of();
     }
 
-    @Override
-    public List<OrderDTO> getOrdersByStatus(String status) {
-        return orderRepository.findByOrderStatus(status).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<OrderDTO> getOrdersByDateRange(LocalDate startDate, LocalDate endDate) {
-        return orderRepository.findByOrderDateBetween(startDate, endDate).stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public OrderDTO updateOrderStatus(Integer id, String status) {
-        Optional<Order> existing = orderRepository.findById(id);
-        if (existing.isPresent()) {
-            Order order = existing.get();
-            order.setOrderStatus(status);
-            Order updated = orderRepository.save(order);
-            return convertToDTO(updated);
-        }
-        throw new RuntimeException("Order not found with id: " + id);
-    }
-
-    @Override
-    public Double calculateOrderTotal(Integer orderId) {
-        Optional<Order> order = orderRepository.findById(orderId);
-        if (order.isPresent()) {
-            return order.get().getOrderDetails().stream()
-                    .mapToDouble(detail -> detail.getPrice() * detail.getQuantity())
-                    .sum();
-        }
-        throw new RuntimeException("Order not found with id: " + orderId);
-    }
 
     private Double calculateTotalFromDetails(List<OrderDetailDTO> orderDetails) {
         if (orderDetails == null || orderDetails.isEmpty()) {

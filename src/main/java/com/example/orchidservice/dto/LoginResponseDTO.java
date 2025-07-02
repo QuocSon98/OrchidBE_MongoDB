@@ -10,10 +10,10 @@ import lombok.Builder;
 @AllArgsConstructor
 @Builder
 public class LoginResponseDTO {
-    private Integer accountId;
+    private String accountId;
     private String accountName;
     private String email;
-    private Integer roleId;
+    private String roleId;
     private String roleName;
     private String message;
     private boolean success;

@@ -9,6 +9,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryDTO {
-    private Integer categoryId;
+    private String categoryId;
     private String categoryName;
 }

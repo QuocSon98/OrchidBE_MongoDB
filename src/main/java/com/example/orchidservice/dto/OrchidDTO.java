@@ -8,12 +8,12 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrchidDTO {
-    private Integer orchidId;
+    private String orchidId;
     private Boolean isNatural;
     private String orchidDescription;
     private String orchidName;
     private String orchidUrl;
     private Double price;
-    private Integer categoryId;
+    private String categoryId;
     private String categoryName;
 }

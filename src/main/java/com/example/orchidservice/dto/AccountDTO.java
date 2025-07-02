@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AccountDTO {
-    private Integer accountId;
+    private String accountId;
     private String accountName;
     private String email;
     private String password;
-    private Integer roleId;
+    private String roleId;
     private String roleName;
 }

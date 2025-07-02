@@ -8,12 +8,12 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailDTO {
-    private Integer id;
-    private Integer orchidId;
+    private String id;
+    private String orchidId;
     private String orchidName; // For display purposes
     private String orchidUrl; // For display purposes
     private Double price;
     private Integer quantity;
-    private Integer orderId;
+    private String orderId;
     private Double subtotal; // Calculated field (price * quantity)
 }

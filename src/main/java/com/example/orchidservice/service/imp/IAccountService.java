@@ -11,11 +11,9 @@ import java.util.Optional;
 
 public interface IAccountService {
     List<Account> getAllAccounts();
-    Optional<Account> getAccountById(Integer id);
+    Optional<Account> getAccountById(String id);
     Account saveAccount(Account account);
-    void deleteAccount(Integer id);
-    Optional<Account> getAccountByEmail(String email);
-    List<Account> getAccountsByRoleId(Integer roleId);
+    void deleteAccount(String id);
     RegisterResponseDTO register(RegisterRequestDTO request);
     LoginResponseDTO login(LoginRequestDTO request);
     void logout(String token);

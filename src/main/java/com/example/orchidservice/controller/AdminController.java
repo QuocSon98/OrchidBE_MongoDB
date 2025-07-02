@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     @GetMapping("/categories/{id}")
-    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Integer id) {
+    public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable String id) {
         Optional<CategoryDTO> category = categoryService.getCategoryById(id);
         return category.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -64,7 +64,7 @@ public class AdminController {
     }
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable String id, @RequestBody CategoryDTO categoryDTO) {
         try {
             CategoryDTO updated = categoryService.updateCategory(id, categoryDTO);
             return ResponseEntity.ok(updated);
@@ -74,7 +74,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable String id) {
         categoryService.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }
@@ -87,7 +87,7 @@ public class AdminController {
     }
 
     @GetMapping("/orchids/{id}")
-    public ResponseEntity<OrchidDTO> getOrchidById(@PathVariable Integer id) {
+    public ResponseEntity<OrchidDTO> getOrchidById(@PathVariable String id) {
         Optional<OrchidDTO> orchid = orchidService.getOrchidById(id);
         return orchid.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -104,7 +104,7 @@ public class AdminController {
     }
 
     @PutMapping("/orchids/{id}")
-    public ResponseEntity<OrchidDTO> updateOrchid(@PathVariable Integer id, @RequestBody OrchidDTO orchidDTO) {
+    public ResponseEntity<OrchidDTO> updateOrchid(@PathVariable String id, @RequestBody OrchidDTO orchidDTO) {
         try {
             OrchidDTO updated = orchidService.updateOrchid(id, orchidDTO);
             return ResponseEntity.ok(updated);
@@ -114,7 +114,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/orchids/{id}")
-    public ResponseEntity<Void> deleteOrchid(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteOrchid(@PathVariable String id) {
         orchidService.deleteOrchid(id);
         return ResponseEntity.noContent().build();
     }
@@ -131,7 +131,7 @@ public class AdminController {
     }
 
     @GetMapping("/orders/{id}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Integer id) {
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable String id) {
         try {
             Optional<OrderDTO> order = orderService.getOrderById(id);
             return order.map(o -> new ResponseEntity<>(o, HttpStatus.OK))
@@ -152,7 +152,7 @@ public class AdminController {
     }
 
     @PutMapping("/orders/{id}")
-    public ResponseEntity<OrderDTO> updateOrder(@PathVariable Integer id, @RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable String id, @RequestBody OrderDTO orderDTO) {
         try {
             OrderDTO updatedOrder = orderService.updateOrder(id, orderDTO);
             return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
@@ -164,7 +164,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/orders/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
         try {
             orderService.deleteOrder(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -194,7 +194,7 @@ public class AdminController {
     }
 
     @GetMapping("/accounts/{id}")
-    public ResponseEntity<AccountDTO> getAccountById(@PathVariable Integer id) {
+    public ResponseEntity<AccountDTO> getAccountById(@PathVariable String id) {
         try {
             Optional<Account> accountOpt = accountService.getAccountById(id);
             return accountOpt.map(account -> {
@@ -238,7 +238,7 @@ public class AdminController {
     }
 
     @PutMapping("/accounts/{id}")
-    public ResponseEntity<AccountDTO> updateAccount(@PathVariable Integer id, @RequestBody AccountDTO accountDTO) {
+    public ResponseEntity<AccountDTO> updateAccount(@PathVariable String id, @RequestBody AccountDTO accountDTO) {
         try {
             Optional<Account> accountOpt = accountService.getAccountById(id);
             if (accountOpt.isEmpty()) {
@@ -271,7 +271,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/accounts/{id}")
-    public ResponseEntity<Void> deleteAccount(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteAccount(@PathVariable String id) {
         try {
             accountService.deleteAccount(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

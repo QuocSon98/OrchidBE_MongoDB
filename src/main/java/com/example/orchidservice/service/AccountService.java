@@ -35,7 +35,7 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public Optional<Account> getAccountById(Integer id) {
+    public Optional<Account> getAccountById(String id) {
         return accountRepository.findById(id);
     }
 
@@ -50,22 +50,13 @@ public class AccountService implements IAccountService {
 
     @Override
     @Transactional
-    public void deleteAccount(Integer id) {
+    public void deleteAccount(String id) {
         if (!accountRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found");
         }
         accountRepository.deleteById(id);
     }
 
-    @Override
-    public Optional<Account> getAccountByEmail(String email) {
-        return accountRepository.findByEmail(email);
-    }
-
-    @Override
-    public List<Account> getAccountsByRoleId(Integer roleId) {
-        return accountRepository.findByRoleRoleId(roleId);
-    }
 
     @Override
     @Transactional
@@ -78,7 +69,7 @@ public class AccountService implements IAccountService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
 
-        Role defaultRole = roleRepository.findById(3)
+        Role defaultRole = roleRepository.findById("3")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Default user role not found"));
 
         Account newAccount = new Account();

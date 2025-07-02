@@ -10,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDTO {
-    private Integer id;
-    private Integer accountId;
+    private String id;
+    private String accountId;
     private String accountName; // For display purposes
     private LocalDate orderDate;
     private String orderStatus;

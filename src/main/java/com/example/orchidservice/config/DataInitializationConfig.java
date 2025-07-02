@@ -20,27 +20,27 @@ public class DataInitializationConfig {
     CommandLineRunner initDatabase(RoleRepository roleRepository, AccountRepository accountRepository) {
         return args -> {
             // Create SuperAdmin role if not exists
-            Role superAdmin = roleRepository.findById(1)
+            Role superAdmin = roleRepository.findById("1")
                     .orElseGet(() -> {
                         Role role = new Role();
                         role.setRoleName("SuperAdmin");
-                        return roleRepository.saveAndFlush(role);
+                        return roleRepository.save(role);
                     });
 
             // Create Admin role if not exists
-            roleRepository.findById(2)
+            roleRepository.findById("2")
                     .orElseGet(() -> {
                         Role role = new Role();
                         role.setRoleName("Admin");
-                        return roleRepository.saveAndFlush(role);
+                        return roleRepository.save(role);
                     });
 
             // Create User role if not exists
-            roleRepository.findById(3)
+            roleRepository.findById("3")
                     .orElseGet(() -> {
                         Role role = new Role();
                         role.setRoleName("User");
-                        return roleRepository.saveAndFlush(role);
+                        return roleRepository.save(role);
                     });
 
             // Create default SuperAdmin account if not exists

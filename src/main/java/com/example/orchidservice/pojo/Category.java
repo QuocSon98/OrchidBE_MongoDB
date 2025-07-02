@@ -1,27 +1,27 @@
 package com.example.orchidservice.pojo;
 
-import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "categories")
+@Builder
+@Document(collection = "categories")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
-    private Integer categoryId;
+    private String categoryId;
 
-    @Column(name = "category_name", nullable = false)
     private String categoryName;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @DBRef
     private List<Orchid> orchids = new ArrayList<>();
 }

@@ -7,12 +7,8 @@ import java.util.Optional;
 
 public interface IOrchidService {
     List<OrchidDTO> getAllOrchids();
-    Optional<OrchidDTO> getOrchidById(Integer id);
+    Optional<OrchidDTO> getOrchidById(String id);
     OrchidDTO saveOrchid(OrchidDTO orchidDTO);
-    OrchidDTO updateOrchid(Integer id, OrchidDTO orchidDTO);
-    void deleteOrchid(Integer id);
-    List<OrchidDTO> getOrchidsByCategory(Integer categoryId);
-    List<OrchidDTO> searchOrchidsByName(String name);
-    List<OrchidDTO> getOrchidsByPriceRange(Double minPrice, Double maxPrice);
-    List<OrchidDTO> getOrchidsByNaturalType(Boolean isNatural);
+    OrchidDTO updateOrchid(String id, OrchidDTO orchidDTO);
+    void deleteOrchid(String id);
 }

@@ -29,7 +29,7 @@ public class ShoppingCartService implements IShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDTO addToCart(String sessionId, Integer orchidId, Integer quantity) {
+    public ShoppingCartDTO addToCart(String sessionId, String orchidId, Integer quantity) {
         Orchid orchid = orchidRepository.findById(orchidId)
                 .orElseThrow(() -> new RuntimeException("Orchid not found: " + orchidId));
 
@@ -47,7 +47,7 @@ public class ShoppingCartService implements IShoppingCartService {
             newItem.setQuantity(quantity);
             newItem.setSubtotal(orchid.getPrice() * quantity);
             newItem.setOrchidUrl(orchid.getOrchidUrl());
-            cart.put(orchidId, newItem);
+            cart.put(Integer.valueOf(orchidId), newItem);
         }
 
         carts.put(sessionId, cart);
@@ -55,7 +55,7 @@ public class ShoppingCartService implements IShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDTO updateCartItem(String sessionId, Integer orchidId, Integer quantity) {
+    public ShoppingCartDTO updateCartItem(String sessionId, String orchidId, Integer quantity) {
         Map<Integer, CartItemDTO> cart = carts.get(sessionId);
         if (cart != null && cart.containsKey(orchidId)) {
             if (quantity <= 0) {
@@ -70,7 +70,7 @@ public class ShoppingCartService implements IShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDTO removeFromCart(String sessionId, Integer orchidId) {
+    public ShoppingCartDTO removeFromCart(String sessionId, String orchidId) {
         Map<Integer, CartItemDTO> cart = carts.get(sessionId);
         if (cart != null) {
             cart.remove(orchidId);

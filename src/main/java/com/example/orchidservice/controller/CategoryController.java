@@ -15,10 +15,4 @@ public class CategoryController {
     @Autowired
     private ICategoryService categoryService;
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
-        Optional<CategoryDTO> category = categoryService.getCategoryByName(name);
-        return category.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
 }
